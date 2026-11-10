@@ -1,0 +1,16 @@
+{
+  "unity_gls": {
+    "path": "weights/strain/unity-211-weights-401.pt",
+    "url": "https://data.unityimaging.net/buckets/matt-output/checkpoints/unity/unity-211/weights-401.pt",
+    "bytes": 270461461,
+    "sha256": "66f78c697a8c1e626d08cb57f792fe8a3cbbfa2021e06a5951f3fa89d3e057f4",
+    "source_commit": "3834c0e530a0cff7d2b0ab8330b2bc8107281788"
+  },
+  "echonet_strain": {
+    "path": "weights/strain/deeplabv3_resnet50_random.pt",
+    "url": "https://github.com/echonet/dynamic/releases/download/v1.0.0/deeplabv3_resnet50_random.pt",
+    "bytes": 317401511,
+    "sha256": "b32ea45b8200e11298ff4021166ff8d187204fb0c27a937bcdb4c518ffcbe1ed",
+    "source_commit": "951993ac47a72778ebc03adbd9776b5df464b64e"
+  }
+}

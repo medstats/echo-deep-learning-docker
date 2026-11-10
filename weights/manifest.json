@@ -1,0 +1,20 @@
+{
+  "echonet": {
+    "url": "https://github.com/echonet/dynamic/releases/download/v1.0.0/r2plus1d_18_32_2_pretrained.pt",
+    "path": "weights/echonet.pt",
+    "bytes": 250572083,
+    "sha256": "dd8f8ef7b5d10b4e7994006eb49fd0344f06e1e2d86671b610c9d8343bd0339f"
+  },
+  "panecho": {
+    "url": "https://github.com/CarDS-Yale/PanEcho/releases/download/v1.0/panecho.pt",
+    "path": "weights/panecho.pt",
+    "bytes": 505054604,
+    "sha256": "896a279d2e5d669dd762adb2077e948ec38087006d2b4001657b87a132e2da35"
+  },
+  "echoclip": {
+    "url": "https://huggingface.co/mkaichristensen/echo-clip/resolve/main/open_clip_pytorch_model.bin",
+    "path": "weights/echoclip/open_clip_pytorch_model.bin",
+    "bytes": 606262375,
+    "sha256": "016e26e15da539b3a97dec89d7fa9a30f106e1c38d36ce64789cb99420786fe0"
+  }
+}
