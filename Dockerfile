@@ -38,18 +38,18 @@ COPY *.py /workspace/
 COPY weights/manifest.json /workspace/weights/manifest.json
 COPY weights/strain/manifest.json /workspace/weights/strain/manifest.json
 
-# Pre-download all 5 local echo model weights
+# Pre-download all 5 local echo model weights with robust retry and error recovery
 RUN mkdir -p /workspace/weights/echoclip /workspace/weights/strain && \
-    curl -L -s -o /workspace/weights/echonet.pt https://github.com/echonet/dynamic/releases/download/v1.0.0/r2plus1d_18_32_2_pretrained.pt && \
-    curl -L -s -o /workspace/weights/panecho.pt https://github.com/CarDS-Yale/PanEcho/releases/download/v1.0/panecho.pt && \
-    curl -L -s -o /workspace/weights/echoclip/open_clip_pytorch_model.bin https://huggingface.co/mkaichristensen/echo-clip/resolve/main/open_clip_pytorch_model.bin && \
-    curl -L -s -o /workspace/weights/strain/unity-211-weights-401.pt https://data.unityimaging.net/buckets/matt-output/checkpoints/unity/unity-211/weights-401.pt && \
-    curl -L -s -o /workspace/weights/strain/deeplabv3_resnet50_random.pt https://github.com/echonet/dynamic/releases/download/v1.0.0/deeplabv3_resnet50_random.pt
+    curl -f -L -sS --retry 5 --retry-delay 3 --retry-all-errors -o /workspace/weights/echonet.pt https://github.com/echonet/dynamic/releases/download/v1.0.0/r2plus1d_18_32_2_pretrained.pt && \
+    curl -f -L -sS --retry 5 --retry-delay 3 --retry-all-errors -o /workspace/weights/panecho.pt https://github.com/CarDS-Yale/PanEcho/releases/download/v1.0/panecho.pt && \
+    curl -f -L -sS --retry 5 --retry-delay 3 --retry-all-errors -o /workspace/weights/echoclip/open_clip_pytorch_model.bin https://huggingface.co/mkaichristensen/echo-clip/resolve/main/open_clip_pytorch_model.bin && \
+    curl -f -L -sS --retry 5 --retry-delay 3 --retry-all-errors -o /workspace/weights/strain/unity-211-weights-401.pt https://data.unityimaging.net/buckets/matt-output/checkpoints/unity/unity-211/weights-401.pt && \
+    curl -f -L -sS --retry 5 --retry-delay 3 --retry-all-errors -o /workspace/weights/strain/deeplabv3_resnet50_random.pt https://github.com/echonet/dynamic/releases/download/v1.0.0/deeplabv3_resnet50_random.pt
 
 # Pre-download EchoPrime core encoder model data
 RUN mkdir -p /workspace/cache/echoprime && \
-    (curl -L -s -o /workspace/cache/echoprime/model_data.zip https://github.com/echonet/EchoPrime/releases/download/v1.0.0/model_data.zip && \
+    (curl -f -L -sS --retry 5 --retry-delay 3 --retry-all-errors -o /workspace/cache/echoprime/model_data.zip https://github.com/echonet/EchoPrime/releases/download/v1.0.0/model_data.zip && \
      unzip -q /workspace/cache/echoprime/model_data.zip -d /workspace/repos/EchoPrime/ && \
      rm -f /workspace/cache/echoprime/model_data.zip) || true
 
-CMD ["python", "/workspace/run_inference.py", "--help"]
+CMD ["python", "/workspace/run_all_echo.py", "--help"]
